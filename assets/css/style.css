@@ -618,17 +618,28 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
   list-style: none; padding: 0;
 }
 .dong-list li {
+  margin: 0; padding: 0;
   background: var(--bg-1);
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 12px 14px; text-align: center; font-size: 0.92rem;
-  color: var(--text-dim); margin: 0;
+  text-align: center; font-size: 0.92rem;
   transition: all .15s; font-weight: 500;
+  overflow: hidden;
 }
+.dong-list li a {
+  display: block; padding: 12px 14px;
+  color: var(--text-dim);
+}
+.dong-list li:has(a):hover,
 .dong-list li:hover {
   border-color: var(--accent);
-  color: var(--accent); background: var(--bg-2);
+  background: var(--bg-2);
+  transform: translateY(-1px);
 }
+.dong-list li:hover a,
+.dong-list li:hover { color: var(--accent); }
+/* a 없는 li(레거시) */
+.dong-list li:not(:has(a)) { padding: 12px 14px; color: var(--text-dim); }
 
 /* Review */
 .review {
