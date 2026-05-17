@@ -133,13 +133,16 @@
 
     <h2>신청 양식</h2>
     <form>
+      <form id="inquiry-form" novalidate>
+      <input type="hidden" name="type" value="register">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
       <div class="form-row">
-        <label for="biz">업체명</label>
-        <input id="biz" type="text" placeholder="업체명">
+        <label for="biz">업체명 *</label>
+        <input id="biz" name="companyName" type="text" placeholder="업체명" required>
       </div>
       <div class="form-row">
         <label for="region">운영 지역</label>
-        <select id="region">
+        <select id="region" name="region">
           <option>해운대구</option><option>수영구</option><option>부산진구</option><option>동래구</option>
           <option>남구</option><option>연제구</option><option>사하구</option><option>사상구</option>
           <option>북구</option><option>금정구</option><option>기장군</option><option>강서구</option>
@@ -148,17 +151,67 @@
       </div>
       <div class="form-row">
         <label for="course">제공 코스 (중복 가능)</label>
-        <input id="course" type="text" placeholder="예: 홈타이, 스웨디시, 아로마">
+        <input id="course" name="courses" type="text" placeholder="예: 홈타이, 스웨디시, 아로마">
       </div>
       <div class="form-row">
-        <label for="reg-contact">담당자 연락처</label>
-        <input id="reg-contact" type="text" placeholder="010-0000-0000">
+        <label for="reg-name">담당자명 *</label>
+        <input id="reg-name" name="name" type="text" placeholder="이름" required>
+      </div>
+      <div class="form-row">
+        <label for="reg-contact">담당자 연락처 *</label>
+        <input id="reg-contact" name="contact" type="text" placeholder="010-0000-0000" required>
       </div>
       <div class="form-row">
         <label for="intro">소개</label>
-        <textarea id="intro" placeholder="운영 개요, 차별점, 운영 시간 등"></textarea>
+        <textarea id="intro" name="message" placeholder="운영 개요, 차별점, 운영 시간 등"></textarea>
       </div>
-      <button type="button" class="btn btn-primary" onclick="alert('등록 신청이 접수되었습니다. 검증 절차 후 회신드리겠습니다.');">등록 신청</button>
+      <button type="submit" class="btn btn-primary" id="submit-btn">등록 신청</button>
+      <p class="form-status" id="form-status" style="margin-top: 14px; font-size: 0.9rem; min-height: 1.5em;"></p>
+    </form>
+
+    <script>
+    (function(){
+      const form = document.getElementById('inquiry-form');
+      const btn = document.getElementById('submit-btn');
+      const status = document.getElementById('form-status');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+        if (!data.name || !data.contact || !data.companyName) {
+          status.style.color = 'var(--accent)';
+          status.textContent = '업체명·담당자명·연락처는 필수입니다.';
+          return;
+        }
+        btn.disabled = true;
+        const orig = btn.textContent;
+        btn.textContent = '전송 중...';
+        status.style.color = 'var(--text-mute)';
+        status.textContent = '전송 중입니다…';
+        try {
+          const res = await fetch('/api/inquiry', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          const json = await res.json().catch(() => ({}));
+          if (res.ok && json.success) {
+            status.style.color = '#7dd87d';
+            status.textContent = '✓ 등록 신청이 정상 접수되었습니다. 검증 절차 후 회신드리겠습니다.';
+            form.reset();
+          } else {
+            status.style.color = 'var(--accent)';
+            status.textContent = '전송 실패: ' + (json.error || '잠시 후 다시 시도해 주세요.');
+          }
+        } catch (err) {
+          status.style.color = 'var(--accent)';
+          status.textContent = '네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = orig;
+        }
+      });
+    })();
+    </script>
     </form>
 
     <p class="muted" style="margin-top: 18px; font-size: 0.9rem;">※ 본 양식은 데모용입니다. 실제 운영 시 백엔드 API와 연동됩니다.</p>
