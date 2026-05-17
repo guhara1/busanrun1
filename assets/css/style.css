@@ -165,6 +165,89 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 .nav-cta:hover { background: var(--accent-2) !important; transform: translateY(-1px); }
 .nav-cta::after { display: none !important; }
 
+/* 헤더 전화 pill */
+.nav-phone {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-left: 6px;
+  padding: 9px 14px !important;
+  background: transparent !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--accent-line) !important;
+  border-radius: 999px !important;
+  font-weight: 800 !important; font-size: 0.92rem !important;
+  font-family: -apple-system, sans-serif;
+  letter-spacing: 0.02em;
+}
+.nav-phone::after { display: none !important; }
+.nav-phone:hover {
+  background: rgba(255,122,26,0.10) !important;
+  color: var(--accent) !important;
+}
+.nav-phone .pi { font-size: 0.9em; }
+
+/* 모바일 하단 떠있는 전화 CTA */
+.phone-float {
+  display: none;
+  position: fixed; left: 14px; right: 14px; bottom: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0a0a0a !important;
+  padding: 16px 20px;
+  border-radius: 14px;
+  font-weight: 800; font-size: 1.02rem;
+  text-align: center;
+  z-index: 90;
+  box-shadow: 0 10px 30px rgba(255,122,26,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.phone-float .label { font-size: 0.78rem; opacity: 0.7; display: block; margin-bottom: 2px; }
+.phone-float .num { display: block; font-size: 1.08rem; letter-spacing: 0.04em; }
+@media (max-width: 880px) {
+  .phone-float { display: block; }
+  body { padding-bottom: 90px; }
+}
+
+/* 구·동 페이지 상단 통계 칩 (Hero stats mini) */
+.gu-stats {
+  display: flex; gap: 12px; margin-top: 28px;
+  flex-wrap: wrap;
+}
+.gu-stats .stat-pill {
+  display: flex; flex-direction: column;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line-2);
+  padding: 12px 18px; border-radius: 12px;
+  min-width: 110px;
+}
+.gu-stats .v {
+  color: var(--accent); font-weight: 800;
+  font-size: 1.15rem; line-height: 1.1;
+}
+.gu-stats .k {
+  color: var(--text-mute); font-size: 0.74rem;
+  margin-top: 4px; letter-spacing: 0.1em;
+  text-transform: uppercase; font-weight: 600;
+}
+
+/* CTA 배너 안 전화번호 강조 */
+.cta-phone {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 14px; padding: 12px 22px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px;
+  color: #fff; font-weight: 700; font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+.cta-phone:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--accent);
+  border-color: var(--accent-line);
+}
+.cta-phone .pi { color: var(--accent); }
+
 /* ===== Hero (에디토리얼 풀블리드) ===== */
 .hero {
   position: relative;
