@@ -87,8 +87,10 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 }
 .brand {
   display: inline-flex; align-items: center; gap: 12px;
-  font-weight: 900; font-size: 1.35rem; color: #fff;
+  font-weight: 900; font-size: 1.25rem; color: #fff;
   letter-spacing: -0.03em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .brand-mark {
   width: 36px; height: 36px;
@@ -113,12 +115,13 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 .main-nav > ul > li { position: relative; margin: 0; }
 .main-nav > ul > li > a {
   position: relative;
-  display: block; padding: 11px 14px;
-  font-size: 0.94rem; font-weight: 600; color: var(--text);
+  display: block; padding: 10px 11px;
+  font-size: 0.9rem; font-weight: 600; color: var(--text);
   border-radius: 6px;
+  white-space: nowrap;
 }
 .main-nav > ul > li > a::after {
-  content: ''; position: absolute; left: 14px; right: 14px; bottom: 6px;
+  content: ''; position: absolute; left: 11px; right: 11px; bottom: 5px;
   height: 2px; background: var(--accent); border-radius: 1px;
   transform: scaleX(0); transform-origin: left;
   transition: transform .25s ease;
@@ -157,10 +160,12 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 
 /* CTA 버튼 헤더 */
 .nav-cta {
-  margin-left: 10px; padding: 9px 18px !important;
+  margin-left: 8px; padding: 8px 16px !important;
   background: var(--accent) !important; color: #0a0a0a !important;
   border-radius: 999px !important; font-weight: 700 !important;
+  font-size: 0.88rem !important;
   box-shadow: 0 4px 14px rgba(255,122,26,0.35);
+  white-space: nowrap;
 }
 .nav-cta:hover { background: var(--accent-2) !important; transform: translateY(-1px); }
 .nav-cta::after { display: none !important; }
@@ -169,14 +174,15 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 .nav-phone {
   display: inline-flex; align-items: center; gap: 6px;
   margin-left: 6px;
-  padding: 9px 14px !important;
+  padding: 8px 13px !important;
   background: transparent !important;
   color: var(--accent) !important;
   border: 1px solid var(--accent-line) !important;
   border-radius: 999px !important;
-  font-weight: 800 !important; font-size: 0.92rem !important;
+  font-weight: 800 !important; font-size: 0.86rem !important;
   font-family: -apple-system, sans-serif;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 .nav-phone::after { display: none !important; }
 .nav-phone:hover {
@@ -184,6 +190,11 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
   color: var(--accent) !important;
 }
 .nav-phone .pi { font-size: 0.9em; }
+
+/* 중간 데스크톱(1100px 이하)에서 헤더 전화 pill 숨김 - 모바일 하단 바로 대체 */
+@media (max-width: 1180px) {
+  .main-nav .nav-phone { display: none; }
+}
 
 /* 모바일 하단 고정 전화 바 (풀폭, 오렌지 그라데이션) */
 .phone-float {
@@ -1449,8 +1460,8 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 .hero-cta { animation-delay: .2s; }
 .hero-stats { animation-delay: .3s; }
 
-/* Mobile */
-@media (max-width: 880px) {
+/* Mobile - 1024px 이하에서 햄버거 메뉴 (매거진 추가 후 메뉴 항목 9개로 늘어 진입점 상향) */
+@media (max-width: 1024px) {
   .nav-toggle { display: inline-flex; align-items: center; }
   .main-nav {
     display: none; position: absolute; top: 100%; left: 0; right: 0;
@@ -1462,7 +1473,11 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
   .main-nav.open { display: block; }
   .main-nav > ul { flex-direction: column; align-items: stretch; padding: 10px; }
   .main-nav > ul > li { width: 100%; }
-  .main-nav > ul > li > a { padding: 14px; }
+  .main-nav > ul > li > a {
+    padding: 14px;
+    font-size: 0.95rem;
+    white-space: normal;
+  }
   .main-nav > ul > li > a::after { display: none; }
   .main-nav .submenu {
     position: static; opacity: 1; visibility: visible; transform: none;
@@ -1475,8 +1490,11 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
     content: ' ▾'; font-size: 0.75rem; color: var(--accent);
   }
   .submenu.region-grid { grid-template-columns: 1fr; }
+  .main-nav .nav-phone { display: inline-flex; margin: 8px 0 0 !important; text-align: center; }
   .nav-cta { margin: 8px 0 0 !important; text-align: center; }
+}
 
+@media (max-width: 880px) {
   .hero { padding: 60px 0 70px; }
   .hero::before { font-size: 28vw; right: -10%; opacity: 0.6; }
   .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 0; }
