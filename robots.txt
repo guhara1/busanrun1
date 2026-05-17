@@ -1,4 +1,80 @@
+# busanmassage.xyz · 부산달리기 robots.txt
+# 모든 검색엔진 봇 허용 (빠른 색인 우선)
+
+# ===== Google =====
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+# ===== Naver =====
+User-agent: Yeti
+Allow: /
+
+User-agent: NaverBot
+Allow: /
+
+# ===== Microsoft Bing =====
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# ===== Daum / Kakao =====
+User-agent: Daumoa
+Allow: /
+
+# ===== 기타 주요 검색엔진 =====
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# ===== SNS 크롤러 (OG 이미지·미리보기) =====
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: KakaoTalk-scrap
+Allow: /
+
+# ===== AI 크롤러 (선택적 허용) =====
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# ===== 기본 정책 - 모두 허용 =====
 User-agent: *
 Allow: /
 
+# ===== 사이트맵 + RSS =====
 Sitemap: https://busanmassage.xyz/sitemap.xml
+Sitemap: https://busanmassage.xyz/magazine/rss.xml
+
+# 호스트 명시 (네이버·얀덱스 인식)
+Host: https://busanmassage.xyz
