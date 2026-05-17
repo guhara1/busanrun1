@@ -185,27 +185,69 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 }
 .nav-phone .pi { font-size: 0.9em; }
 
-/* 모바일 하단 떠있는 전화 CTA */
+/* 모바일 하단 고정 전화 바 (풀폭, 오렌지 그라데이션) */
 .phone-float {
   display: none;
-  position: fixed; left: 14px; right: 14px; bottom: 14px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
   color: #0a0a0a !important;
-  padding: 16px 20px;
-  border-radius: 14px;
-  font-weight: 800; font-size: 1.02rem;
-  text-align: center;
-  z-index: 90;
-  box-shadow: 0 10px 30px rgba(255,122,26,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+  padding: 14px 20px;
   text-decoration: none;
-  letter-spacing: 0.01em;
-  border: 1px solid rgba(255,255,255,0.18);
+  z-index: 90;
+  box-shadow: 0 -12px 32px rgba(0,0,0,0.45),
+              0 -1px 0 rgba(255,255,255,0.30) inset;
+  -webkit-tap-highlight-color: transparent;
 }
-.phone-float .label { font-size: 0.78rem; opacity: 0.7; display: block; margin-bottom: 2px; }
-.phone-float .num { display: block; font-size: 1.08rem; letter-spacing: 0.04em; }
+.phone-float .pf-inner {
+  display: flex; align-items: center; gap: 14px;
+  max-width: 520px; margin: 0 auto;
+}
+.phone-float .pf-icon {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(10,10,10,0.12);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.35rem; flex-shrink: 0;
+  position: relative;
+}
+.phone-float .pf-icon::after {
+  content: ''; position: absolute; inset: -5px;
+  border-radius: 50%; border: 2px solid rgba(10,10,10,0.22);
+  animation: phone-pulse 2.2s ease-out infinite;
+}
+@keyframes phone-pulse {
+  0% { transform: scale(0.92); opacity: 0.85; }
+  100% { transform: scale(1.22); opacity: 0; }
+}
+.phone-float .pf-text {
+  flex: 1; display: flex; flex-direction: column;
+  line-height: 1.1;
+}
+.phone-float .pf-label {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; opacity: 0.62;
+  text-transform: uppercase;
+}
+.phone-float .pf-num {
+  font-size: 1.24rem; font-weight: 900;
+  letter-spacing: 0.04em; margin-top: 3px;
+}
+.phone-float .pf-arrow {
+  font-size: 1.4rem; font-weight: 900;
+  opacity: 0.5; transition: transform .15s, opacity .15s;
+}
+.phone-float:active { filter: brightness(1.05); }
+.phone-float:active .pf-arrow { transform: translateX(3px); opacity: 0.8; }
+
 @media (max-width: 880px) {
   .phone-float { display: block; }
-  body { padding-bottom: 90px; }
+  body { padding-bottom: 86px; }
+}
+/* iOS Safe Area 대응 */
+@supports (padding: max(0px)) {
+  @media (max-width: 880px) {
+    .phone-float { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+    body { padding-bottom: calc(86px + env(safe-area-inset-bottom)); }
+  }
 }
 
 /* 구·동 페이지 상단 통계 칩 (Hero stats mini) */
