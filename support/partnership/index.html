@@ -182,14 +182,16 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
           });
-          const json = await res.json().catch(() => ({}));
+          const raw = await res.text();
+          let json = {};
+          try { json = JSON.parse(raw); } catch (_) {}
           if (res.ok && json.ok) {
             status.style.color = '#7dd87d';
             status.textContent = '✓ 문의가 정상 접수되었습니다. 영업일 기준 1~2일 내 회신드리겠습니다.';
             form.reset();
           } else {
             status.style.color = 'var(--accent)';
-            status.textContent = '전송 실패 [HTTP ' + res.status + ']: ' + (await res.clone().text().catch(()=>'') || JSON.stringify(json) || '응답 없음');
+            status.textContent = '전송 실패 [HTTP ' + res.status + ']: ' + (raw || JSON.stringify(json) || '응답 없음').slice(0, 300);
             console.log('[inquiry response]', res.status, json);
           }
         } catch (err) {
