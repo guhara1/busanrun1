@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.busandalligi.example/sitemap.xml
+Sitemap: https://busanmassage.xyz/sitemap.xml
