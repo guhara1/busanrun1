@@ -184,13 +184,13 @@
             body: JSON.stringify(data),
           });
           const json = await res.json().catch(() => ({}));
-          if (res.ok && json.success) {
+          if (res.ok && json.ok) {
             status.style.color = '#7dd87d';
             status.textContent = '✓ 문의가 정상 접수되었습니다. 영업일 기준 1~2일 내 회신드리겠습니다.';
             form.reset();
           } else {
             status.style.color = 'var(--accent)';
-            status.textContent = '전송 실패: ' + (json.error || '잠시 후 다시 시도해 주세요.');
+            status.textContent = '전송 실패: ' + ((json.error || (json.results && JSON.stringify(json.results)) || '잠시 후 다시 시도해 주세요.'));
           }
         } catch (err) {
           status.style.color = 'var(--accent)';
