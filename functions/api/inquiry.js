@@ -1,54 +1,67 @@
-// Cloudflare Pages Function — POST /api/inquiry
-// 부산달리기 문의 폼 제출 시 텔레그램으로 즉시 알림 전송
+// Cloudflare Pages Function — /api/inquiry
+// 부산달리기 문의 폼 → 텔레그램 이중 발송
 //
-// 환경변수 (Cloudflare Pages 대시보드에서 설정):
-//   TG_TOKEN_OWNER  — 대표 봇 토큰
-//   TG_CHAT_OWNER   — 대표 텔레그램 chat_id
-//   TG_TOKEN_FRIEND — 보조 봇 토큰
-//   TG_CHAT_FRIEND  — 보조 텔레그램 chat_id
+// 환경변수: TG_TOKEN_OWNER, TG_CHAT_OWNER, TG_TOKEN_FRIEND, TG_CHAT_FRIEND
 
-export async function onRequestPost(context) {
-  return handleInquiry(context.request, context.env);
-}
+const CORS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Max-Age': '86400',
+};
 
-export async function onRequestOptions() {
-  return new Response(null, {
-    status: 204,
+function json(obj, status = 200) {
+  return new Response(JSON.stringify(obj), {
+    status,
     headers: {
-      'Access-Control-Allow-Origin': 'https://busanmassage.xyz',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Max-Age': '86400',
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-store',
+      ...CORS,
     },
   });
 }
 
-export async function handleInquiry(request, env) {
-  if (!request.headers.get('content-type')?.includes('application/json')) {
-    return jsonResponse({ ok: false, error: 'Content-Type must be application/json' }, 400);
+// 모든 메서드를 명시적으로 처리
+export async function onRequest(context) {
+  const { request, env } = context;
+  const method = request.method;
+
+  if (method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: CORS });
   }
 
+  if (method !== 'POST') {
+    return json({ ok: false, error: `Method ${method} not allowed. POST only.` }, 405);
+  }
+
+  // Content-Type 검증
+  const ct = request.headers.get('content-type') || '';
+  if (!ct.toLowerCase().includes('application/json')) {
+    return json({ ok: false, error: 'Content-Type must be application/json' }, 400);
+  }
+
+  // JSON 파싱
   let data;
   try {
     data = await request.json();
   } catch (e) {
-    return jsonResponse({ ok: false, error: 'Invalid JSON' }, 400);
+    return json({ ok: false, error: 'Invalid JSON' }, 400);
   }
 
-  // 허니팟: 봇이 채워넣는 hidden 필드
+  // 허니팟
   if (data.website) {
-    return jsonResponse({ ok: true, skipped: true });
+    return json({ ok: true, skipped: true });
   }
 
-  // 필수 항목 (부산달리기 폼 기준)
+  // 필수 항목
   const required = ['companyName', 'name', 'contact'];
   for (const k of required) {
     if (!data[k] || String(data[k]).trim() === '') {
-      return jsonResponse({ ok: false, error: `필수 항목 누락: ${k}` }, 400);
+      return json({ ok: false, error: `필수 항목 누락: ${k}` }, 400);
     }
   }
 
-  // 문의 유형 라벨
+  // 메시지 구성
   const type = (data.type || '').toString().trim();
   const title = type === 'register'
     ? '📥 부산달리기 업체 등록 문의'
@@ -58,53 +71,32 @@ export async function handleInquiry(request, env) {
 
   const ts = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
 
-  // 메시지 포맷 — 섹션 구분
-  const sections = [];
-  sections.push(`${title}`);
-  sections.push(`━━━━━━━━━━━━━━━━━━`);
+  const lines = [
+    title,
+    '━━━━━━━━━━━━━━━━━━',
+  ];
 
   // 업체 정보
-  const bizLines = [];
-  if (data.companyName) bizLines.push(`• 업체/회사명: ${data.companyName}`);
-  if (data.region) bizLines.push(`• 지역: ${data.region}`);
-  if (data.courses) bizLines.push(`• 제공 코스: ${data.courses}`);
-  if (bizLines.length) {
-    sections.push(`🏢 업체 정보`);
-    sections.push(bizLines.join('\n'));
-    sections.push('');
-  }
+  if (data.companyName) lines.push(`🏢 업체/회사명: ${data.companyName}`);
+  if (data.region) lines.push(`📍 지역: ${data.region}`);
+  if (data.courses) lines.push(`💆 제공 코스: ${data.courses}`);
+  if (data.partnershipType) lines.push(`🔗 제휴 유형: ${data.partnershipType}`);
 
-  // 제휴 정보 (partnership 전용)
-  if (type === 'partnership') {
-    const ptLines = [];
-    if (data.partnershipType) ptLines.push(`• 제휴 유형: ${data.partnershipType}`);
-    if (ptLines.length) {
-      sections.push(`🔗 제휴 정보`);
-      sections.push(ptLines.join('\n'));
-      sections.push('');
-    }
-  }
+  lines.push('');
+  lines.push(`👤 담당자: ${data.name}`);
+  lines.push(`📞 연락처: ${data.contact}`);
+  if (data.email) lines.push(`📧 이메일: ${data.email}`);
 
-  // 담당자 정보
-  const mgrLines = [];
-  mgrLines.push(`• 성함: ${data.name}`);
-  mgrLines.push(`• 연락처: ${data.contact}`);
-  if (data.email) mgrLines.push(`• 이메일: ${data.email}`);
-  sections.push(`👤 담당자`);
-  sections.push(mgrLines.join('\n'));
-  sections.push('');
+  lines.push('');
+  lines.push('📝 내용:');
+  lines.push((data.message && String(data.message).trim()) || '(내용 없음)');
+  lines.push('');
+  lines.push('━━━━━━━━━━━━━━━━━━');
+  lines.push(`🕒 접수: ${ts}`);
 
-  // 추가 요청
-  sections.push(`📝 문의 내용`);
-  sections.push((data.message && String(data.message).trim()) || '(내용 없음)');
-  sections.push('');
+  const message = lines.join('\n');
 
-  sections.push(`━━━━━━━━━━━━━━━━━━`);
-  sections.push(`🕒 접수: ${ts}`);
-
-  const message = sections.join('\n');
-
-  // 이중 발송 대상
+  // 이중 발송
   const targets = [
     { token: env.TG_TOKEN_OWNER,  chat: env.TG_CHAT_OWNER,  label: '대표' },
     { token: env.TG_TOKEN_FRIEND, chat: env.TG_CHAT_FRIEND, label: '보조' },
@@ -127,23 +119,12 @@ export async function handleInquiry(request, env) {
         }),
       });
       const body = await tgRes.json();
-      results.push({ label: t.label, ok: body.ok === true, body });
+      results.push({ label: t.label, ok: body.ok === true, description: body.description });
     } catch (e) {
       results.push({ label: t.label, ok: false, error: String(e) });
     }
   }
 
   const anyOk = results.some((r) => r.ok);
-  return jsonResponse({ ok: anyOk, results }, anyOk ? 200 : 502);
-}
-
-function jsonResponse(obj, status = 200) {
-  return new Response(JSON.stringify(obj), {
-    status,
-    headers: {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-store',
-      'Access-Control-Allow-Origin': 'https://busanmassage.xyz',
-    },
-  });
+  return json({ ok: anyOk, results }, anyOk ? 200 : 502);
 }
