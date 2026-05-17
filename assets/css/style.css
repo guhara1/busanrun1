@@ -938,6 +938,42 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 }
 .footer-disclaimer strong { color: var(--text-dim); }
 
+/* 운영자 정보 블록 */
+.footer-operator {
+  padding: 24px 0; border-bottom: 1px solid var(--line);
+}
+.footer-operator h5 {
+  font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  font-family: 'JetBrains Mono', monospace; font-weight: 700;
+  margin: 0 0 12px;
+}
+.operator-dl {
+  display: grid; grid-template-columns: 130px 1fr;
+  gap: 8px 22px; margin: 0;
+  font-size: 0.86rem;
+}
+.operator-dl dt {
+  color: var(--text-mute); font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.operator-dl dd {
+  color: var(--text-dim); margin: 0;
+}
+.operator-dl dd a { color: var(--accent); }
+.operator-dl dd a:hover { text-decoration: underline; }
+
+@media (max-width: 720px) {
+  .operator-dl { grid-template-columns: 1fr; gap: 2px 0; }
+  .operator-dl dt { margin-top: 8px; font-size: 0.76rem; }
+}
+
+/* 문의 안내 부연 (24시간 문의 안내 라벨 아래) */
+.contact-note {
+  font-size: 0.78rem; color: var(--text-mute);
+  margin-top: 6px; line-height: 1.5;
+}
+
 .footer-bottom {
   padding-top: 24px;
   display: flex; justify-content: space-between;
