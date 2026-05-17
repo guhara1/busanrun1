@@ -979,6 +979,165 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
   font-size: 1.05rem; line-height: 1.85;
   color: var(--text);
 }
+
+/* TL;DR 박스 (글 상단 요약) */
+.tldr-box {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255,122,26,0.08), transparent 60%),
+    var(--bg-1);
+  border: 1px solid var(--accent-line);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin: 0 0 36px;
+}
+.tldr-box .tldr-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.18em;
+  color: var(--accent); font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.tldr-box .tldr-label::before {
+  content: ''; width: 18px; height: 1px; background: var(--accent);
+}
+.tldr-box ul {
+  margin: 0; padding-left: 1.2em;
+}
+.tldr-box li {
+  color: var(--text); font-size: 0.96rem;
+  line-height: 1.65; margin-bottom: 6px;
+}
+.tldr-box li::marker { color: var(--accent); }
+.tldr-box li:last-child { margin-bottom: 0; }
+.tldr-box strong { color: #fff; }
+
+/* 글 메타 데이터 칩 (읽기 시간 + 갱신일) */
+.post-meta-data {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-top: 16px;
+}
+.meta-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line-2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+.meta-chip .mc-key { color: var(--accent); font-weight: 700; }
+
+/* 시나리오 카드 (포스트 내부) */
+.scenario {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin: 24px 0;
+  position: relative;
+}
+.scenario::before {
+  content: ''; position: absolute; top: 0; left: 24px;
+  width: 32px; height: 2px; background: var(--accent);
+  transform: translateY(-50%);
+}
+.scenario .sc-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.12em;
+  color: var(--accent); font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.scenario h4 {
+  font-size: 1.05rem; color: #fff;
+  margin: 0 0 10px;
+}
+.scenario p:last-child { margin-bottom: 0; }
+
+/* 포스트 내 FAQ */
+.post-faq {
+  margin: 32px 0;
+  border-top: 2px solid var(--accent);
+}
+.post-faq .pf-q {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.post-faq .pf-q summary {
+  font-weight: 700; color: #fff;
+  cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px;
+}
+.post-faq .pf-q summary::-webkit-details-marker { display: none; }
+.post-faq .pf-q summary::after {
+  content: '+'; color: var(--accent);
+  font-size: 1.2rem; font-weight: 300;
+}
+.post-faq .pf-q[open] summary::after { content: '−'; }
+.post-faq .pf-q .pf-a {
+  padding: 12px 0 0;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+/* 방법론·한계 박스 */
+.methodology {
+  background: rgba(255,255,255,0.02);
+  border-left: 3px solid var(--text-mute);
+  padding: 16px 22px;
+  margin: 28px 0;
+  border-radius: 0 10px 10px 0;
+}
+.methodology .meth-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.14em;
+  color: var(--text-mute); font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.methodology p {
+  font-size: 0.9rem; color: var(--text-dim);
+  margin: 0; line-height: 1.7;
+}
+.methodology p + p { margin-top: 8px; }
+
+/* 포스트 내 데이터 표 */
+.post-body table {
+  width: 100%; border-collapse: collapse;
+  margin: 22px 0;
+  font-size: 0.92rem;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.post-body th, .post-body td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+.post-body th {
+  background: #000; color: var(--accent);
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.post-body tr:last-child td { border-bottom: none; }
+.post-body tbody tr:hover { background: var(--bg-2); }
+
+/* 핵심 포인트 (highlight callout) */
+.callout {
+  background: linear-gradient(135deg, rgba(255,122,26,0.06), transparent);
+  border: 1px solid var(--accent-line);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 22px 0;
+  font-size: 0.96rem;
+}
+.callout strong { color: var(--accent); }
+.callout p:last-child { margin-bottom: 0; }
 .post-body h2 {
   font-size: 1.5rem; color: #fff;
   margin: 2.2em 0 0.7em;
