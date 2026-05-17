@@ -838,16 +838,15 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 }
 .notice-detail h2 {
   font-size: 1.3rem; color: #fff;
-  margin: 2em 0 0.5em;
+  margin: 2.4em 0 0.9em;
   font-weight: 800;
-  padding-top: 0.6em;
-  position: relative;
+  padding: 0 0 0 18px;
+  border-left: 3px solid var(--accent);
+  position: static;
+  line-height: 1.4;
 }
-.notice-detail h2:first-of-type { margin-top: 0; padding-top: 0; }
-.notice-detail h2:not(:first-of-type)::before {
-  content: ''; position: absolute; top: 0; left: 0;
-  width: 28px; height: 2px; background: var(--accent);
-}
+.notice-detail h2:first-of-type { margin-top: 0; }
+.notice-detail h2::before { display: none !important; }
 .notice-detail p { margin-bottom: 1.2em; }
 .notice-detail ul { margin: 0 0 1.4em 1.2em; }
 .notice-detail li { margin-bottom: 0.5em; }
