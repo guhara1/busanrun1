@@ -824,6 +824,57 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 /* a 없는 li(레거시) */
 .dong-list li:not(:has(a)) { padding: 12px 14px; color: var(--text-dim); }
 
+/* Topic list — long-tail anchor variant (1열, 좌측 정렬, 화살표) */
+.dong-list.topic-list,
+ul.topic-list {
+  display: flex; flex-direction: column; gap: 8px;
+  grid-template-columns: none;
+  list-style: none; padding: 0; margin: 12px 0 0;
+}
+.dong-list.topic-list li,
+ul.topic-list li {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: 8px;
+  text-align: left; font-size: 0.93rem;
+  transition: all .15s; font-weight: 500;
+  overflow: hidden;
+  margin: 0; padding: 0;
+}
+.dong-list.topic-list li a,
+ul.topic-list li a {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 11px 14px;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.4;
+}
+.dong-list.topic-list li a::after,
+ul.topic-list li a::after {
+  content: "→";
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  transition: transform .15s, color .15s;
+  flex-shrink: 0;
+}
+.dong-list.topic-list li:hover,
+ul.topic-list li:hover {
+  border-color: var(--accent);
+  border-left-color: var(--accent);
+  background: var(--bg-2);
+  transform: translateX(2px);
+}
+.dong-list.topic-list li:hover a,
+ul.topic-list li:hover a { color: var(--accent); }
+.dong-list.topic-list li:hover a::after,
+ul.topic-list li:hover a::after {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+/* 사이드바 안에서는 폰트 살짝 축소 */
+.sidebar ul.topic-list li a { font-size: 0.88rem; padding: 10px 12px; }
+
 /* Review */
 .review {
   background: var(--bg-1);
