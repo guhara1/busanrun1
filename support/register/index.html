@@ -199,11 +199,13 @@
             form.reset();
           } else {
             status.style.color = 'var(--accent)';
-            status.textContent = '전송 실패: ' + ((json.error || (json.results && JSON.stringify(json.results)) || '잠시 후 다시 시도해 주세요.'));
+            status.textContent = '전송 실패 [HTTP ' + res.status + ']: ' + (await res.clone().text().catch(()=>'') || JSON.stringify(json) || '응답 없음');
+            console.log('[inquiry response]', res.status, json);
           }
         } catch (err) {
           status.style.color = 'var(--accent)';
-          status.textContent = '네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+          status.textContent = '네트워크 오류: ' + (err.message || err);
+          console.log('[inquiry error]', err);
         } finally {
           btn.disabled = false;
           btn.textContent = orig;
