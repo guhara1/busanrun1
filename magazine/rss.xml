@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>부산달리기 매거진</title>
+    <link>https://guhara1.github.io/busanrun1/magazine/</link>
+    <atom:link href="https://guhara1.github.io/busanrun1/magazine/rss.xml" rel="self" type="application/rss+xml" />
+    <description>부산 출장마사지 가이드·지역·웰니스·동향을 다루는 부산달리기 매거진</description>
+    <language>ko-KR</language>
+    <lastBuildDate>Sun, 17 May 2026 02:49:30 GMT</lastBuildDate>
+    <item>
+      <title>출장마사지 첫 이용, 준비할 것과 흐름 정리</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/guides/first-time-flow/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/guides/first-time-flow/</guid>
+      <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
+      <category>출장마사지 가이드</category>
+      <description><![CDATA[처음 출장마사지를 이용하는 분이 가장 궁금해하는 진행 순서, 준비물, 시간 안내를 한 페이지에 정리했습니다.]]></description>
+    </item>
+    <item>
+      <title>홈타이·스웨디시·아로마, 어떤 코스가 나에게 맞을까</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/guides/course-comparison/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/guides/course-comparison/</guid>
+      <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
+      <category>출장마사지 가이드</category>
+      <description><![CDATA[네 가지 대표 코스의 진행 방식·적합한 컨디션·시간대를 비교해 선택을 돕습니다.]]></description>
+    </item>
+    <item>
+      <title>야간 출장 시간대 — 12시 이후 이용 시 알아둘 점</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/guides/night-time-tips/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/guides/night-time-tips/</guid>
+      <pubDate>Sun, 03 May 2026 00:00:00 GMT</pubDate>
+      <category>출장마사지 가이드</category>
+      <description><![CDATA[심야 시간대 출장마사지의 도착 시간, 호텔 출입, 결제, 추가 비용 등을 정리했습니다.]]></description>
+    </item>
+    <item>
+      <title>서면 권역 출장마사지 — 24시간 호텔·오피스텔이 만든 수요</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/regions/seomyeon-deep-dive/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/regions/seomyeon-deep-dive/</guid>
+      <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+      <category>지역 깊이 탐방</category>
+      <description><![CDATA[부산진구 부전동·전포동·양정동 일대 서면 권역의 출장마사지 수요 구조와 이용 패턴을 정리했습니다.]]></description>
+    </item>
+    <item>
+      <title>해운대 마린시티 호텔 출장 — 동선과 객실 출입</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/regions/haeundae-marine-city/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/regions/haeundae-marine-city/</guid>
+      <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
+      <category>지역 깊이 탐방</category>
+      <description><![CDATA[마린시티 일대 고급 오피스텔·호텔의 출장마사지 동선, 보안 출입, 주차 안내까지.]]></description>
+    </item>
+    <item>
+      <title>정관신도시·명지국제신도시 — 신축 권역의 부상</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/regions/new-cities-rise/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/regions/new-cities-rise/</guid>
+      <pubDate>Wed, 15 Apr 2026 00:00:00 GMT</pubDate>
+      <category>지역 깊이 탐방</category>
+      <description><![CDATA[부산 외곽 신도시(정관·명지·화명)에서 출장마사지 수요가 늘고 있는 배경을 정리했습니다.]]></description>
+    </item>
+    <item>
+      <title>앉아 일하는 사람을 위한 코스 선택</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/wellness/desk-worker-courses/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/wellness/desk-worker-courses/</guid>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
+      <category>웰니스·건강 정보</category>
+      <description><![CDATA[장시간 앉아서 일하는 분들에게 자주 발생하는 뭉침 부위와 적합한 코스를 정리했습니다.]]></description>
+    </item>
+    <item>
+      <title>마사지 후 컨디션 관리 — 음주·식사·운동 타이밍</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/wellness/after-massage-care/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/wellness/after-massage-care/</guid>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <category>웰니스·건강 정보</category>
+      <description><![CDATA[마사지 직후 무엇을 하면 좋고 무엇을 피해야 하는지, 시간대별 권장 사항을 정리했습니다.]]></description>
+    </item>
+    <item>
+      <title>부산 출장마사지 권역별 도착 시간 — 운영 모니터링 정리</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/trends/busan-arrival-time-analysis/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/trends/busan-arrival-time-analysis/</guid>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 GMT</pubDate>
+      <category>업계 동향</category>
+      <description><![CDATA[부산 16개 구·군의 평균 도착 시간을 권역별로 정리해, 예약 시 참고할 수 있도록 했습니다.]]></description>
+    </item>
+    <item>
+      <title>1인 가구 증가와 출장마사지 이용 패턴 변화</title>
+      <link>https://guhara1.github.io/busanrun1/magazine/trends/single-household-trend/</link>
+      <guid>https://guhara1.github.io/busanrun1/magazine/trends/single-household-trend/</guid>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
+      <category>업계 동향</category>
+      <description><![CDATA[부산 1인 가구 비율이 늘면서 출장마사지 이용 패턴도 변화하고 있는 흐름을 관찰합니다.]]></description>
+    </item>
+  </channel>
+</rss>

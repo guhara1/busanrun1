@@ -841,8 +841,218 @@ hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
 .form-row select option { background: var(--bg-1); color: var(--text); }
 
 /* ============================================
-   FOOTER - 에디토리얼 다크 디자인
+   MAGAZINE - 에디토리얼 블로그
    ============================================ */
+.magazine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
+  margin: 32px 0;
+}
+.post-card {
+  position: relative;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 26px 24px 22px;
+  transition: transform .15s, border-color .15s, background .15s;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.post-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s ease;
+}
+.post-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--line-2);
+  background: var(--bg-2);
+}
+.post-card:hover::before { transform: scaleX(1); }
+.post-card .pc-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.16em;
+  color: var(--accent); font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.post-card h3 {
+  font-size: 1.15rem; font-weight: 800;
+  color: #fff; line-height: 1.35;
+  margin: 0 0 12px;
+}
+.post-card .pc-excerpt {
+  font-size: 0.92rem; color: var(--text-dim);
+  line-height: 1.65; margin: 0; flex: 1;
+}
+.post-card .pc-meta {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--text-mute);
+  letter-spacing: 0.08em;
+  display: flex; justify-content: space-between;
+}
+.post-card .pc-meta .arrow { color: var(--accent); }
+.post-card.featured {
+  grid-column: span 2;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255,122,26,0.12), transparent 60%),
+    var(--bg-1);
+  border-color: var(--accent-line);
+}
+@media (max-width: 720px) {
+  .post-card.featured { grid-column: span 1; }
+}
+
+/* 카테고리 칩 (매거진 메인 상단) */
+.cat-chips {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: 24px 0 8px;
+}
+.cat-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  background: var(--bg-1);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  color: var(--text); font-weight: 600;
+  font-size: 0.9rem;
+  transition: all .15s;
+}
+.cat-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--bg-2);
+}
+.cat-chip .ck {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.1em;
+  color: var(--accent); font-weight: 700;
+}
+
+/* 글 본문 (포스트 페이지) */
+.post-header {
+  background:
+    radial-gradient(700px 320px at 78% 40%, rgba(255,122,26,0.10), transparent 60%),
+    linear-gradient(180deg, #0a0a0a, #121212);
+  border-bottom: 1px solid var(--line);
+  padding: 80px 0 56px;
+  position: relative;
+}
+.post-header .post-meta-row {
+  display: flex; gap: 14px; align-items: center;
+  margin-bottom: 22px; flex-wrap: wrap;
+}
+.post-header .cat-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.16em;
+  color: var(--accent); font-weight: 700;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+}
+.post-header .post-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem; color: var(--text-mute);
+  letter-spacing: 0.1em;
+}
+.post-header h1 {
+  font-size: clamp(2rem, 4.6vw, 3rem);
+  font-weight: 900; color: #fff;
+  letter-spacing: -0.025em; line-height: 1.18;
+  max-width: 860px; margin: 0 0 18px;
+}
+.post-header .lead {
+  font-size: 1.1rem; color: var(--text-dim);
+  max-width: 760px; margin: 0;
+  line-height: 1.65;
+}
+
+.post-body {
+  max-width: 740px; margin: 0 auto;
+  padding: 64px 22px 32px;
+  font-size: 1.05rem; line-height: 1.85;
+  color: var(--text);
+}
+.post-body h2 {
+  font-size: 1.5rem; color: #fff;
+  margin: 2.2em 0 0.7em;
+  font-weight: 800;
+  position: relative; padding-top: 0.8em;
+}
+.post-body h2:first-of-type { margin-top: 0; padding-top: 0; }
+.post-body h2:not(:first-of-type)::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 36px; height: 2px; background: var(--accent);
+  border-radius: 1px;
+}
+.post-body h3 {
+  font-size: 1.15rem; color: var(--accent);
+  margin: 1.8em 0 0.6em;
+  font-weight: 700;
+}
+.post-body p { margin: 0 0 1.3em; }
+.post-body ul, .post-body ol { margin: 0 0 1.4em 1.4em; padding: 0; }
+.post-body li { margin-bottom: 0.6em; }
+.post-body li::marker { color: var(--accent); }
+.post-body blockquote {
+  margin: 1.8em 0;
+  padding: 18px 24px;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-1);
+  color: var(--text-dim);
+  border-radius: 0 10px 10px 0;
+}
+.post-body blockquote p:last-child { margin-bottom: 0; }
+.post-body strong { color: #fff; font-weight: 700; }
+.post-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.post-byline {
+  max-width: 740px; margin: 32px auto;
+  padding: 26px 28px;
+  background: var(--bg-1);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+}
+.post-byline .by-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--accent);
+  letter-spacing: 0.14em; font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.post-byline .by-name {
+  font-size: 1.02rem; color: #fff; font-weight: 800;
+}
+.post-byline .by-bio {
+  font-size: 0.9rem; color: var(--text-dim);
+  margin-top: 8px; line-height: 1.65;
+}
+
+/* 관련 글 섹션 */
+.related-section {
+  max-width: 1180px; margin: 60px auto 0;
+  padding: 50px 22px 0;
+  border-top: 1px solid var(--line);
+}
+.related-section h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem; letter-spacing: 0.16em;
+  color: var(--accent); font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+}
+
+
 
 .site-footer {
   background: #050505;
