@@ -74,6 +74,7 @@ Allow: /
 
 # ===== 사이트맵 + RSS =====
 Sitemap: https://busanmassage.xyz/sitemap.xml
+Sitemap: https://busanmassage.xyz/sitemap1.xml
 Sitemap: https://busanmassage.xyz/magazine/rss.xml
 
 # 호스트 명시 (네이버·얀덱스 인식)
